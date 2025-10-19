@@ -29,7 +29,7 @@ def test_divide_by_zero(monkeypatch, capsys):
 
     calculator()
     captured = capsys.readouterr()
-    assert "Cannot divide by zero" in captured.out
+    assert "Error: Division by zero is not allowed." in captured.out
 
 
 def test_non_numeric_input(monkeypatch, capsys):

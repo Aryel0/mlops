@@ -23,7 +23,6 @@ def test_invalid_choice(monkeypatch, capsys):
 
 
 def test_divide_by_zero(monkeypatch, capsys):
-    # Simulate user choosing divide, then entering 10 and 0, then quitting
     inputs = iter(["4", "10", "0", "n"])
     monkeypatch.setattr(builtins, "input", lambda _: next(inputs))
 
@@ -33,8 +32,7 @@ def test_divide_by_zero(monkeypatch, capsys):
 
 
 def test_non_numeric_input(monkeypatch, capsys):
-    # Simulate user entering letters instead of numbers
-    inputs = iter(["1", "a", "b", "n"])
+    inputs = iter(["1", "a", "b", "2", "3", "n"])
     monkeypatch.setattr(builtins, "input", lambda _: next(inputs))
 
     calculator()
@@ -43,11 +41,10 @@ def test_non_numeric_input(monkeypatch, capsys):
 
 
 def test_repeat_calculation(monkeypatch, capsys):
-    # User does addition, then chooses to calculate again
     inputs = iter(["1", "2", "3", "y", "2", "5", "3", "n"])
     monkeypatch.setattr(builtins, "input", lambda _: next(inputs))
 
     calculator()
     captured = capsys.readouterr()
-    assert "Result: 5.0" in captured.out  # First calculation
-    assert "Result: 2.0" in captured.out  # Second calculation (subtract)
+    assert "Result: 5.0" in captured.out 
+    assert "Result: 2.0" in captured.out 

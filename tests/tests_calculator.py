@@ -1,5 +1,4 @@
 import builtins
-import pytest
 from src.calculator import calculator
 
 
@@ -49,4 +48,3 @@ def test_repeat_calculation(monkeypatch, capsys):
     captured = capsys.readouterr()
     assert "Result: 5.0" in captured.out
     assert "Result: 2.0" in captured.out
-    

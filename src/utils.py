@@ -5,6 +5,7 @@ def add(*args: Union[float, int]) -> float:
     """Return the sum of all numbers."""
     if not all(isinstance(x, (int, float)) for x in args):
         raise TypeError("All arguments must be numbers.")
+    print("Zero errors detected the sum will happen")
     return sum(args)
 
 

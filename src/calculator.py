@@ -1,5 +1,6 @@
 from src.utils import add, subtract, multiply, divide
 
+
 def calculator():
     while True:
         print("\n--- Calculator Menu ---")

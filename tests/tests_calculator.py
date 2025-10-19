@@ -1,4 +1,5 @@
 import builtins
+import pytest
 from src.calculator import calculator
 
 
@@ -31,11 +32,21 @@ def test_divide_by_zero(monkeypatch, capsys):
     assert "Error: Division by zero is not allowed." in captured.out
 
 
+def test_non_numeric_input(monkeypatch, capsys):
+    inputs = iter(["1", "a", "b", "n"])
+    monkeypatch.setattr(builtins, "input", lambda _: next(inputs))
+
+    calculator()
+    captured = capsys.readouterr()
+    assert "Invalid number input." in captured.out
+
+
 def test_repeat_calculation(monkeypatch, capsys):
     inputs = iter(["1", "2", "3", "y", "2", "5", "3", "n"])
     monkeypatch.setattr(builtins, "input", lambda _: next(inputs))
 
     calculator()
     captured = capsys.readouterr()
-    assert "Result: 5.0" in captured.out 
-    assert "Result: 2.0" in captured.out 
+    assert "Result: 5.0" in captured.out
+    assert "Result: 2.0" in captured.out
+    

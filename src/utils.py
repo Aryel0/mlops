@@ -1,5 +1,6 @@
 from typing import Union
 
+
 def add(*args: Union[float, int]) -> float:
     """Return the sum of all numbers."""
     if not all(isinstance(x, (int, float)) for x in args):

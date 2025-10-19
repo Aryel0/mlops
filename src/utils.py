@@ -1,12 +1,14 @@
-def add(*args: float | int) -> float:
+from typing import Union
+
+
+def add(*args: Union[float, int]) -> float:
     """Return the sum of all numbers."""
     if not all(isinstance(x, (int, float)) for x in args):
         raise TypeError("All arguments must be numbers.")
     return sum(args)
 
 
-def subtract(*args: float | int) -> float:
-    """Subtract all following numbers from the first."""
+def subtract(*args: Union[float, int]) -> float:
     if not args:
         return 0
     if not all(isinstance(x, (int, float)) for x in args):
@@ -16,7 +18,8 @@ def subtract(*args: float | int) -> float:
         result -= num
     return result
 
-def multiply(*args: float | int) -> float:
+
+def multiply(*args: Union[float, int]) -> float:
     if not all(isinstance(x, (int, float)) for x in args):
         raise TypeError("All arguments must be numbers.")
     result = 1
@@ -24,11 +27,12 @@ def multiply(*args: float | int) -> float:
         result *= num
     return result
 
-def divide(*args: float | int) -> float:
-    if not all(isinstance(x, (int, float)) for x in args):
-        raise TypeError("All arguments must be numbers.")
+
+def divide(*args: Union[float, int]) -> float:
     if not args:
         return 0
+    if not all(isinstance(x, (int, float)) for x in args):
+        raise TypeError("All arguments must be numbers.")
     result = args[0]
     for num in args[1:]:
         if num == 0:

@@ -20,3 +20,22 @@ def test_invalid_choice(monkeypatch, capsys):
     calculator()
     captured = capsys.readouterr()
     assert "Invalid choice" in captured.out
+
+
+def test_divide_by_zero(monkeypatch, capsys):
+    inputs = iter(["4", "10", "0", "n"])
+    monkeypatch.setattr(builtins, "input", lambda _: next(inputs))
+
+    calculator()
+    captured = capsys.readouterr()
+    assert "Error: Division by zero is not allowed." in captured.out
+
+
+def test_repeat_calculation(monkeypatch, capsys):
+    inputs = iter(["1", "2", "3", "y", "2", "5", "3", "n"])
+    monkeypatch.setattr(builtins, "input", lambda _: next(inputs))
+
+    calculator()
+    captured = capsys.readouterr()
+    assert "Result: 5.0" in captured.out
+    assert "Result: 2.0" in captured.out

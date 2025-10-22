@@ -2,7 +2,6 @@ from src.utils import add, subtract, multiply, divide
 
 
 def calculator():
-    """Simple interactive calculator."""
     while True:
         print("\n--- Calculator Menu ---")
         print("1. Add")
@@ -11,16 +10,24 @@ def calculator():
         print("4. Divide")
         print("5. Quit")
 
-        choice = input("Choose an operation (1–5): ")
+        choice = input("Enter choice (1/2/3/4/5): ")
 
         if choice == "5":
             print("Goodbye!")
             break
 
+        if choice not in ("1", "2", "3", "4"):
+            print("Invalid choice. Please try again.")
+            continue  # or return to stop immediately
+
         try:
             num1 = float(input("Enter first number: "))
             num2 = float(input("Enter second number: "))
+        except ValueError:
+            print("Invalid number input.")
+            continue
 
+        try:
             if choice == "1":
                 result = add(num1, num2)
             elif choice == "2":
@@ -29,22 +36,12 @@ def calculator():
                 result = multiply(num1, num2)
             elif choice == "4":
                 result = divide(num1, num2)
-            else:
-                print("Invalid choice, please try again.")
-                continue
 
             print(f"Result: {result}")
+        except ValueError as e:
+            print(f"Error: {e}")
 
-        except ValueError:
-            print("❌ Invalid input, please enter numbers only.")
-        except ZeroDivisionError:
-            print("❌ Cannot divide by zero.")
-
-        again = input("Do you want another calculation? (y/n): ").lower()
-        if again != "y":
-            print("Exiting calculator. Goodbye!")
+        again = input("Do you want another calculation? (y/n): ")
+        if again.lower() != "y":
+            print("Goodbye!")
             break
-
-
-if __name__ == "__main__":
-    calculator()
